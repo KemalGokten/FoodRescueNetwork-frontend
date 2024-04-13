@@ -1,12 +1,15 @@
 import { PasswordInput, Button, TextInput } from "@mantine/core";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const { login } = useContext(AuthContext);
 
   const loginUser = async () => {
     try {
@@ -19,6 +22,7 @@ const LoginPage = () => {
         if (usersData.length === 0) {
           alert("Email or password is wrong");
         } else {
+          login(usersData[0]);
           navigate("/");
         }
       } else {
