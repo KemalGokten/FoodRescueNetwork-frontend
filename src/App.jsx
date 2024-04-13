@@ -2,17 +2,24 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import { Route, Routes } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./contexts/AuthContext.jsx";
 
 function App() {
-  return(<>
-    <Routes>
-      <Route path="/" element={<LoginPage/>}/>
-      <Route path="/successLogin" element={<h1>Login is succesful</h1>} />
-      <Route path="/accounts/emailsignup/" element={<SignupPage />} />
-      <Route path="*" element={<NotFoundPage/>} />
-    </Routes>  
-      
-    </>);
+  const { isLoggedIn } = useContext(AuthContext);
+
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={isLoggedIn ? <h1>LoggedIn</h1> : <LoginPage />}
+        />
+        <Route path="/accounts/emailsignup/" element={<SignupPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
