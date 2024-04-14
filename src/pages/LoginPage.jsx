@@ -81,7 +81,6 @@ const LoginPage = () => {
             required
             onChange={(event) => setEmail(event.currentTarget.value)}
           />
-          ;
           <PasswordInput
             radius="md"
             placeholder="Password"
@@ -93,6 +92,9 @@ const LoginPage = () => {
             Login
           </Button>
         </form>
+      </div>
+      <div>
+        <Link to="/forgot_my_password" state={{email}}>Forgot password?</Link>
       </div>
       <div>
         <p>
