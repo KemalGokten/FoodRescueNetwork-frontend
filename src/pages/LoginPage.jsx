@@ -1,15 +1,21 @@
-import { PasswordInput, Button, TextInput } from "@mantine/core";
+import { PasswordInput, Button, TextInput, Alert } from "@mantine/core";
+import { IconInfoCircle } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 const LoginPage = () => {
+  //States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState(null);
+
   const navigate = useNavigate();
 
   const { login } = useContext(AuthContext);
+
+  const icon = <IconInfoCircle />;
 
   const loginUser = async () => {
     try {
@@ -20,7 +26,11 @@ const LoginPage = () => {
       if (response.ok) {
         const usersData = await response.json();
         if (usersData.length === 0) {
-          alert("Email or password is wrong");
+          setAlert({
+            title: "Alert",
+            message: "Email or password is wrong",
+            color: "red",
+          });
         } else {
           login(usersData[0]);
           navigate("/");
@@ -41,6 +51,20 @@ const LoginPage = () => {
   return (
     <>
       <h1>Login Page</h1>
+
+      {alert && (
+        <Alert
+          variant="light"
+          color={alert.color}
+          title={alert.title}
+          icon={icon}
+          withCloseButton
+          closeButtonLabel="Dismiss"
+          onClose={() => setAlert(false)}
+        >
+          {alert.message}
+        </Alert>
+      )}
 
       <div>
         <img src="" alt="App Logo" />
