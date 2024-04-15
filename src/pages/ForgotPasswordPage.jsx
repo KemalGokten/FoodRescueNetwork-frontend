@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { TextInput, Button, Alert } from "@mantine/core";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordPage = () => {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const { email } = location.state || {};
   const [userEmail, setUserEmail] = useState(email);
@@ -30,10 +33,10 @@ const ForgotPasswordPage = () => {
       };
       //Ask from @kemal for service and user id to test forgotPassword, never push with the code.
       await emailjs.send(
-        "Requires service id",
+        "service_pyrt46p",
         "template_njtbsno",
         templateParams,
-        "Requires user id"
+        "V6ek4DzfwV6sldBU1"
       );
 
       setAlert({ type: "success", message: "Verification email sent." });
@@ -61,11 +64,18 @@ const ForgotPasswordPage = () => {
       );
       if (!userResponse.ok) {
         throw new Error("Failed to fetch user data.");
+      } else {
+        setAlert({
+          type: "success",
+          message:
+            "Your Password changed successfully. You will be directing to Login page!",
+        });
+        setTimeout(() => navigate("/"), 2000);
       }
 
       const userDataArray = await userResponse.json();
       const userData = userDataArray[0];
-      const userId = userData.id; 
+      const userId = userData.id;
 
       const updateUserUrl = `http://localhost:4000/users/${userId}`;
 
