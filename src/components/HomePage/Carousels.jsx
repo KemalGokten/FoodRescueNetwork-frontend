@@ -1,6 +1,8 @@
 import { Carousel } from "@mantine/carousel";
+import RestaurantCard from "./RestaurantCard";
 
-export const Carousels = () => {
+export const Carousels = ({ restaurantsData }) => {
+
   return (
     <Carousel
       withIndicators
@@ -11,15 +13,14 @@ export const Carousels = () => {
       align="start"
       slidesToScroll={3}
     >
-      <Carousel.Slide>1</Carousel.Slide>
-      <Carousel.Slide>2</Carousel.Slide>
-      <Carousel.Slide>3</Carousel.Slide>
-      <Carousel.Slide>4</Carousel.Slide>
-      <Carousel.Slide>5</Carousel.Slide>
-      <Carousel.Slide>6</Carousel.Slide>
-
+      {restaurantsData &&
+        restaurantsData.map((restaurant) => {
+          return (
+            <Carousel.Slide key={restaurant.id}>
+              <RestaurantCard restaurantData={restaurant} />
+            </Carousel.Slide>
+          );
+        })}
     </Carousel>
   );
 };
-
-
