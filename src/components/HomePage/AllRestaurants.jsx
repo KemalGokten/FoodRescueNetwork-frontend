@@ -1,29 +1,14 @@
+import { Link } from "react-router-dom";
+import { Carousels } from "./Carousels.jsx";
 
- import { useEffect } from 'react';
-import {Carousels} from './Carousels.jsx'
- 
-const AllRestaurants = () => {
-    const [restaurants, setRestaurants] = useState([]);
+const AllRestaurants = ({ restaurants }) => {
+  return (
+    <>
+      <h3>All Restaurants : </h3> 
+      <Link to="/restaurants">Show All </Link>
+      <Carousels restaurantsData={restaurants} />
+    </>
+  );
+};
 
-   
-    useEffect (() => {
-        const getRestaurants = async () => {
-            try {
-                
-            } catch (error) {
-                console.log
-            }
-
-        }
-
-
-
-    },[]);
-    return ( 
-        <Carousels/>
-
-
-     );
-}
- 
 export default AllRestaurants;
