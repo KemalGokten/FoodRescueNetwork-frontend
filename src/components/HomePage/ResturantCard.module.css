@@ -1,5 +1,15 @@
 .image {
-  filter: brightness(65%);
+  filter: brightness(70%);
+}
+
+.boxContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: end;
+}
+
+.food {
+  padding: 2px 8px 2px 0;
 }
 
 .cardFooter {

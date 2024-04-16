@@ -1,4 +1,12 @@
-import { Card, Image, Text, BackgroundImage, Box, Center } from "@mantine/core";
+import {
+  Card,
+  Image,
+  Text,
+  BackgroundImage,
+  Box,
+  Center,
+  Flex,
+} from "@mantine/core";
 import { Link } from "react-router-dom";
 import styles from "./ResturantCard.module.css";
 import { IoIosStar } from "react-icons/io";
@@ -18,23 +26,36 @@ const RestaurantCard = ({ restaurantData }) => {
       radius="lg"
     >
       <Card.Section>
-        <Box maw={300} mx="auto">
+        <Box mx="auto" h={130} pos={"relative"} className={styles.boxContainer}>
           <BackgroundImage
-            className={styles.image}
+            pos={"absolute"}
+            classNames={{
+              root: styles.image,
+            }}
             src={restaurantData.foodImg}
             h={130}
             radius="sm"
-          >
-            <Text>
-              <Avatar src={restaurantData.logoUrl} alt="it's me" />
-            </Text>
-          </BackgroundImage>
+          ></BackgroundImage>
+          <Text p={16}>
+            {" "}
+            <Flex justify={"flex-start"} align={"center"} gap={8}>
+              <Avatar
+                p={8}
+                bg={"white"}
+                src={restaurantData.logoUrl}
+                alt="it's me"
+              />
+              <Text style={{ zIndex: "1" }} fw={700} size="xl" c={"white"}>
+                {restaurantData.restaurantName}
+              </Text>
+            </Flex>
+          </Text>
         </Box>
       </Card.Section>
 
       <Text fw={500} size="lg" mt="md">
         {restaurantData.foods.map((food) => {
-          return <span> {food} </span>;
+          return <span className={styles.food}> {food} </span>;
         })}
         <Text c="dimmed" size="sm">
           Collect time: {restaurantData.collectTime.startTime} -{" "}
