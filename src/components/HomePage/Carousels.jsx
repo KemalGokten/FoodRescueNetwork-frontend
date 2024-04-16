@@ -2,11 +2,9 @@ import { Carousel } from "@mantine/carousel";
 import RestaurantCard from "./RestaurantCard";
 
 export const Carousels = ({ restaurantsData }) => {
-
   return (
     <Carousel
       withIndicators
-      height={200}
       slideSize="33.333333%"
       slideGap="md"
       loop
