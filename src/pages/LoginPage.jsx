@@ -20,7 +20,7 @@ const LoginPage = () => {
   const loginUser = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4000/users?email=${email}&password=${password}`
+        `${import.meta.env.VITE_API_URL}/users?email=${email}&password=${password}`
       );
 
       if (response.ok) {
@@ -94,7 +94,9 @@ const LoginPage = () => {
         </form>
       </div>
       <div>
-        <Link to="/forgot_my_password" state={{email}}>Forgot password?</Link>
+        <Link to="/forgot_my_password" state={{ email }}>
+          Forgot password?
+        </Link>
       </div>
       <div>
         <p>

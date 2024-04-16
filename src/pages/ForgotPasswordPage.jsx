@@ -31,12 +31,12 @@ const ForgotPasswordPage = () => {
         to_email: userEmail,
         verification_code: code,
       };
-      //Ask from @kemal for service and user id to test forgotPassword, never push with the code.
+
       await emailjs.send(
-        "service_pyrt46p",
-        "template_njtbsno",
+        `${import.meta.env.VITE_EMAILJS_SERVICE_ID}`,
+        `${import.meta.env.VITE_EMAILJS_TEMPLATE_ID}`,
         templateParams,
-        "V6ek4DzfwV6sldBU1"
+        `${import.meta.env.VITE_EMAILJS_USER_ID}`
       );
 
       setAlert({ type: "success", message: "Verification email sent." });
@@ -60,7 +60,7 @@ const ForgotPasswordPage = () => {
     try {
       // Fetch the user data
       const userResponse = await fetch(
-        `http://localhost:4000/users?email=${userEmail}`
+        `${import.meta.env.VITE_API_URL}/users?email=${userEmail}`
       );
       if (!userResponse.ok) {
         throw new Error("Failed to fetch user data.");
@@ -77,7 +77,7 @@ const ForgotPasswordPage = () => {
       const userData = userDataArray[0];
       const userId = userData.id;
 
-      const updateUserUrl = `http://localhost:4000/users/${userId}`;
+      const updateUserUrl = `${import.meta.env.VITE_API_URL}/users/${userId}`;
 
       const updateResponse = await fetch(updateUserUrl, {
         method: "PUT",
