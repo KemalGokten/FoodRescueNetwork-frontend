@@ -9,6 +9,7 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
 import RestaurantsPage from "./pages/RestaurantsPage.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import AccountDetails from "./pages/AccountDetails.jsx";
+import PreviousOrdersPage from "./pages/PreviousOrdersPage.jsx";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -25,6 +26,7 @@ function App() {
         <Route path="/restaurants" element={<RestaurantsPage searchBar= {searchBar} />} />
       )}
         <Route path= "/account_details" element = {<AccountDetails/>}/>
+        <Route path= "/previous_orders" element = {<PreviousOrdersPage/>}/>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
