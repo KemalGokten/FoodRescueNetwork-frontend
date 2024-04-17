@@ -62,7 +62,7 @@ const SignupPage = () => {
 
   return (
     <Flex direction="column" justify="center" align="center">
-      <Logo size="16px" />
+      <Logo />
       <h3>Signup</h3>
 
       <div>
