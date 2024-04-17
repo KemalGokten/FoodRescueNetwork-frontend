@@ -1,7 +1,7 @@
 import GetRestaurants from "../components/GetRestaurants";
 import RestaurantCard from "../components/HomePage/RestaurantCard";
 import { useState, useEffect } from "react";
-import { NativeSelect } from "@mantine/core";
+import { NativeSelect, Select } from "@mantine/core";
 import orderRestaurants from "../components/OrderRestaurantsBy";
 import FilterRestaurantsBy from "../components/FilterRestaurantsBy";
 
@@ -9,8 +9,8 @@ const RestaurantsPage = () => {
   const [restaurants, setRestaurants] = useState(null);
   const [tempRestaurants, setTempRestaurants] = useState(restaurants);
 
-  const [sortBy, setSortBy] = useState("Most Popular");
-  const [filterBy, setFilterBy] = useState("Pizza");
+  const [sortBy, setSortBy] = useState("");
+  const [filterBy, setFilterBy] = useState("");
 
   useEffect(() => {
     const getRestaurants = async () => {
@@ -47,17 +47,21 @@ const RestaurantsPage = () => {
   return (
     <>
       <h1>Restaurants</h1>
-      <NativeSelect
+      <Select
         value={sortBy}
         label="Sort by"
-        onChange={(event) => setSortBy(event.currentTarget.value)}
+        onChange={setSortBy}
         data={["Most Popular", "Price", "Distance"]}
+        clearable
+        allowDeselect
       />
-      <NativeSelect
+      <Select
         value={filterBy}
         label="Filter by"
-        onChange={(event) => setFilterBy(event.currentTarget.value)}
+        onChange={setFilterBy}
         data={["Pizza", "Burger", "Noodles"]}
+        clearable
+        allowDeselect
       />
       {tempRestaurants &&
         tempRestaurants.map((restaurant) => (
