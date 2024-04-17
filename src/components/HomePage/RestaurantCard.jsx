@@ -53,9 +53,9 @@ const RestaurantCard = ({ restaurantData }) => {
         </Box>
       </Card.Section>
 
-      <Text fw={500} size="lg" mt="md">
-        {restaurantData.foods.map((food) => {
-          return <span className={styles.food}> {food} </span>;
+      <Text  fw={500} size="lg" mt="md">
+        {restaurantData.foods.map((food,index) => {
+          return <span key={index} className={styles.food}> {food} </span>;
         })}
         <Text c="dimmed" size="sm">
           Collect time: {restaurantData.collectTime.startTime} -{" "}
