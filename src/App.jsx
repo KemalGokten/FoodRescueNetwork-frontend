@@ -8,6 +8,7 @@ import { AuthContext } from "./contexts/AuthContext.jsx";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
 import RestaurantsPage from "./pages/RestaurantsPage.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
+import AccountDetails from "./pages/AccountDetails.jsx";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -20,7 +21,10 @@ function App() {
         <Route path="/" element={isLoggedIn ? <HomePage /> : <LoginPage />} />
         <Route path="/accounts/emailsignup/" element={<SignupPage />} />
         <Route path="/forgot_my_password" element={<ForgotPasswordPage />} />
+        {isLoggedIn && (
         <Route path="/restaurants" element={<RestaurantsPage searchBar= {searchBar} />} />
+      )}
+        <Route path= "/account_details" element = {<AccountDetails/>}/>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
