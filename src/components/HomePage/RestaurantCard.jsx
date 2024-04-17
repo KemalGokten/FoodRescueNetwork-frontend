@@ -13,7 +13,6 @@ import { IoIosStar } from "react-icons/io";
 import { Avatar } from "@mantine/core";
 
 const RestaurantCard = ({ restaurantData }) => {
-  console.log(restaurantData);
   return (
     <Card
       withBorder
