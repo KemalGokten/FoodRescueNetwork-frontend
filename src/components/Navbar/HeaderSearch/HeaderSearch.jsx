@@ -9,11 +9,15 @@ import { Avatar } from "@mantine/core";
 import { RiUser3Line } from "react-icons/ri";
 import { GrFavorite } from "react-icons/gr";
 import { IoIosBasket } from "react-icons/io";
+import { IoHomeOutline } from "react-icons/io5";
+
 
 const links = [
+  {icon: IoHomeOutline, link: "/" },
   { icon: GrFavorite, link: "/wishlist" },
   { icon: RiUser3Line, link: "/myaccount" },
   { icon: IoIosBasket, link: "/cart" },
+  
 ];
 
 export function HeaderSearch() {
