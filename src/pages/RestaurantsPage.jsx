@@ -1,11 +1,11 @@
 import GetRestaurants from "../components/GetRestaurants";
 import RestaurantCard from "../components/HomePage/RestaurantCard";
 import { useState, useEffect } from "react";
-import { NativeSelect, Select } from "@mantine/core";
+import { Select } from "@mantine/core";
 import orderRestaurants from "../components/OrderRestaurantsBy";
 import FilterRestaurantsBy from "../components/FilterRestaurantsBy";
 
-const RestaurantsPage = () => {
+const RestaurantsPage = ({searchBar}) => {
   const [restaurants, setRestaurants] = useState(null);
   const [tempRestaurants, setTempRestaurants] = useState(restaurants);
 
@@ -16,15 +16,23 @@ const RestaurantsPage = () => {
     const getRestaurants = async () => {
       try {
         const restaurantsData = await GetRestaurants();
-
         setRestaurants(restaurantsData);
 
-        const sortedRestaurants = orderRestaurants(restaurantsData, sortBy);
-        const filteredRestaurants = FilterRestaurantsBy(
-          sortedRestaurants,
-          filterBy
+        const searchedRestaurants = FilterRestaurantsBy(
+          restaurantsData,
+          searchBar,
         );
-        setTempRestaurants(filteredRestaurants);
+  
+        
+        const filteredRestaurants = FilterRestaurantsBy(
+          searchedRestaurants,
+          filterBy,
+        );
+      
+        const sortedRestaurants = orderRestaurants(filteredRestaurants, sortBy);
+  
+      
+        setTempRestaurants(sortedRestaurants);
       } catch (error) {
         console.log(error, "on getting restaurants");
       }
@@ -35,14 +43,25 @@ const RestaurantsPage = () => {
 
   useEffect(() => {
     if (restaurants) {
-      const sortedRestaurants = orderRestaurants(restaurants, sortBy);
-      const filteredRestaurants = FilterRestaurantsBy(
-        sortedRestaurants,
-        filterBy
+
+      
+      const searchedRestaurants = FilterRestaurantsBy(
+        restaurants,
+        searchBar,
       );
-      setTempRestaurants(filteredRestaurants);
+
+      
+      const filteredRestaurants = FilterRestaurantsBy(
+        searchedRestaurants,
+        filterBy,
+      );
+    
+      const sortedRestaurants = orderRestaurants(filteredRestaurants, sortBy);
+
+    
+      setTempRestaurants(sortedRestaurants);
     }
-  }, [sortBy, filterBy]);
+  }, [sortBy, filterBy , searchBar]);
 
   return (
     <>
@@ -57,9 +76,9 @@ const RestaurantsPage = () => {
       />
       <Select
         value={filterBy}
-        label="Filter by"
+        label="Filter by Date"
         onChange={setFilterBy}
-        data={["Pizza", "Burger", "Noodles"]}
+        data={["Today", "Tomorrow"]}
         clearable
         allowDeselect
       />

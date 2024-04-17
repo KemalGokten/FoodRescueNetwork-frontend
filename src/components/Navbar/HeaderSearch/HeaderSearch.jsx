@@ -11,17 +11,22 @@ import { GrFavorite } from "react-icons/gr";
 import { IoIosBasket } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const links = [
-  {icon: IoHomeOutline, link: "/" },
+  { icon: IoHomeOutline, link: "/" },
   { icon: GrFavorite, link: "/wishlist" },
   { icon: RiUser3Line, link: "/myaccount" },
   { icon: IoIosBasket, link: "/cart" },
-  
 ];
 
-export function HeaderSearch() {
+export function HeaderSearch({setSearchBar}) {
+  const [searchBar, setSearchBarLocal] = useState("");
   const [opened, { toggle }] = useDisclosure(false);
+  
+
+  const navigate = useNavigate();
 
   const items = links.map((link, index) => (
     <Link key={index} to={link.link} className={classes.link}>
@@ -30,6 +35,13 @@ export function HeaderSearch() {
       </Avatar>
     </Link>
   ));
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      setSearchBar(searchBar);
+      navigate("/restaurants");
+    }
+  };
 
   return (
     <header className={classes.header}>
@@ -46,14 +58,20 @@ export function HeaderSearch() {
               />
             }
             data={[
-              "React",
-              "Angular",
-              "Vue",
-              "Next.js",
-              "Riot.js",
-              "Svelte",
-              "Blitz.js",
+              "Pizza",
+              "Burger",
+              "Nudels",
+              "Salads",
+              "Pasta",
+              "Curries",
+              "Stir-fry",
+              "Coffee",
+              "Sandwiches",
+              "Pastries",
             ]}
+            value={searchBar}
+            onChange={setSearchBarLocal}
+            onKeyDown={handleKeyDown}
             visibleFrom="xs"
           />
         </Group>
