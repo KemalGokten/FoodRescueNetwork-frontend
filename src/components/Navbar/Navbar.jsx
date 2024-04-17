@@ -1,10 +1,10 @@
 
-import { HeaderSearch } from "./HeaderSearch/HeaderSearch";
+import { HeaderSearch } from "./HeaderSearch/HeaderSearch.jsx";
 
-const Navbar = () => {
+const Navbar = ({setSearchBar}) => {
     return ( 
 
-        <HeaderSearch/>
+        <HeaderSearch setSearchBar={setSearchBar} />
      );
 }
 
