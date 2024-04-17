@@ -1,5 +1,10 @@
 const FilterRestaurantsBy = (restaurantsData , filterBy) => {
-    return restaurantsData.filter(restaurant => restaurant.foods.includes(filterBy));
+
+    if(filterBy){
+        return restaurantsData.filter(restaurant => restaurant.foods.includes(filterBy));
+    }
+
+    return restaurantsData;
 }
  
 export default FilterRestaurantsBy;
