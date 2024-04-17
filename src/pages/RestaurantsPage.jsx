@@ -1,11 +1,11 @@
 import GetRestaurants from "../components/GetRestaurants";
 import RestaurantCard from "../components/HomePage/RestaurantCard";
 import { useState, useEffect } from "react";
-import { Select } from "@mantine/core";
+import { Flex, Select } from "@mantine/core";
 import orderRestaurants from "../components/OrderRestaurantsBy";
 import FilterRestaurantsBy from "../components/FilterRestaurantsBy";
 
-const RestaurantsPage = ({searchBar}) => {
+const RestaurantsPage = ({ searchBar }) => {
   const [restaurants, setRestaurants] = useState(null);
   const [tempRestaurants, setTempRestaurants] = useState(restaurants);
 
@@ -20,18 +20,16 @@ const RestaurantsPage = ({searchBar}) => {
 
         const searchedRestaurants = FilterRestaurantsBy(
           restaurantsData,
-          searchBar,
+          searchBar
         );
-  
-        
+
         const filteredRestaurants = FilterRestaurantsBy(
           searchedRestaurants,
-          filterBy,
+          filterBy
         );
-      
+
         const sortedRestaurants = orderRestaurants(filteredRestaurants, sortBy);
-  
-      
+
         setTempRestaurants(sortedRestaurants);
       } catch (error) {
         console.log(error, "on getting restaurants");
@@ -43,45 +41,45 @@ const RestaurantsPage = ({searchBar}) => {
 
   useEffect(() => {
     if (restaurants) {
+      const searchedRestaurants = FilterRestaurantsBy(restaurants, searchBar);
 
-      
-      const searchedRestaurants = FilterRestaurantsBy(
-        restaurants,
-        searchBar,
-      );
-
-      
       const filteredRestaurants = FilterRestaurantsBy(
         searchedRestaurants,
-        filterBy,
+        filterBy
       );
-    
+
       const sortedRestaurants = orderRestaurants(filteredRestaurants, sortBy);
 
-    
       setTempRestaurants(sortedRestaurants);
     }
-  }, [sortBy, filterBy , searchBar]);
+  }, [sortBy, filterBy, searchBar]);
 
   return (
     <>
       <h1>Restaurants</h1>
-      <Select
-        value={sortBy}
-        label="Sort by"
-        onChange={setSortBy}
-        data={["Most Popular", "Price", "Distance"]}
-        clearable
-        allowDeselect
-      />
-      <Select
-        value={filterBy}
-        label="Filter by Date"
-        onChange={setFilterBy}
-        data={["Today", "Tomorrow"]}
-        clearable
-        allowDeselect
-      />
+      <Flex align="center" gap={70} justify="space-between">
+        <Flex align="center" gap={8}>
+          <label>sort by</label>
+          <Select
+            value={sortBy}
+            onChange={setSortBy}
+            data={["Most Popular", "Price", "Distance"]}
+            clearable
+            allowDeselect
+          />
+        </Flex>
+
+        <Flex align="center" gap={8}>
+          <label>filter by date</label>
+          <Select
+            value={filterBy}
+            onChange={setFilterBy}
+            data={["Today", "Tomorrow"]}
+            clearable
+            allowDeselect
+          />
+        </Flex>
+      </Flex>
       {tempRestaurants &&
         tempRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.id} restaurantData={restaurant} />

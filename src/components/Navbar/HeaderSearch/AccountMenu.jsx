@@ -1,11 +1,6 @@
 import cx from "clsx";
 import { useContext, useState } from "react";
-import {
-  Avatar,
-  UnstyledButton,
-  Menu,
-  rem,
-} from "@mantine/core";
+import { Avatar, UnstyledButton, Menu, rem } from "@mantine/core";
 import {
   IconLogout,
   IconSettings,
@@ -16,24 +11,27 @@ import { RiUser3Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 
-
 export default function AccountMenu() {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const navigate = useNavigate();
 
-  const { logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const handleClickDetails = () => {
     navigate("/account_details");
-  }
+  };
 
   const handleClickOrders = () => {
     navigate("/previous_orders");
-  }
+  };
 
   const handleLogout = () => {
     logout();
     navigate("/");
+  };
+
+  const handleClickSignupRestaurant = () =>{
+    navigate("/signup_restaurant");
   }
 
   return (
@@ -50,11 +48,9 @@ export default function AccountMenu() {
         <UnstyledButton
           className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
         >
-
-          <Avatar color="blue" radius="sm"  size={40}>
-          <RiUser3Line size="1.5rem" />
-        </Avatar>
-
+          <Avatar color="blue" radius="sm" size={40}>
+            <RiUser3Line size="1.5rem" />
+          </Avatar>
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
@@ -69,17 +65,33 @@ export default function AccountMenu() {
         >
           Account settings
         </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconSwitchHorizontal
-              style={{ width: rem(16), height: rem(16) }}
-              stroke={1.5}
-            />
-          }
-          onClick={handleClickOrders}
-        >
-          Orders
-        </Menu.Item>
+
+        {user.accountType === "user" ? (
+          <Menu.Item
+            leftSection={
+              <IconSwitchHorizontal
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+            onClick={handleClickOrders}
+          >
+            Orders
+          </Menu.Item>
+        ) : (
+          <Menu.Item
+            leftSection={
+              <IconSwitchHorizontal
+                style={{ width: rem(16), height: rem(16) }}
+                stroke={1.5}
+              />
+            }
+            onClick={handleClickSignupRestaurant}
+          >
+            Signup your restaurant
+          </Menu.Item>
+        )}
+
         <Menu.Divider />
         <Menu.Item
           leftSection={

@@ -16,8 +16,8 @@ function App() {
   const [searchBar, setSearchBar] = useState("");
 
   return (
-    <>
-      {isLoggedIn && <Navbar setSearchBar= {setSearchBar} />}
+    <div style={{ margin: "0 16px 16px 16px" }}>
+      {isLoggedIn && <Navbar setSearchBar={setSearchBar} />}
       <Routes>
         <Route path="/" element={isLoggedIn ? <HomePage /> : <LoginPage />} />
         <Route path="/accounts/emailsignup/" element={<SignupPage />} />
@@ -29,7 +29,7 @@ function App() {
         <Route path= "/previous_orders" element = {<PreviousOrdersPage/>}/>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
