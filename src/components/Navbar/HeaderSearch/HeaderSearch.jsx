@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Autocomplete, Group, Burger, rem } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
-import { MantineLogo } from "@mantinex/mantine-logo";
 import classes from "./HeaderSearch.module.css";
+import Logo from "../../ui/logo.jsx";
 
 import AccountMenu from "./AccountMenu.jsx";
 
@@ -24,7 +24,6 @@ const links = [
 export function HeaderSearch({ setSearchBar }) {
   const [searchBar, setSearchBarLocal] = useState("");
   const [opened, { toggle }] = useDisclosure(false);
-  
 
   const navigate = useNavigate();
 
@@ -63,10 +62,11 @@ export function HeaderSearch({ setSearchBar }) {
                 stroke={1.5}
               />
             }
+            // TODO: gather food names from backend data
             data={[
               "Pizza",
               "Burger",
-              "Nudels",
+              "Noodles",
               "Salads",
               "Pasta",
               "Curries",
@@ -82,9 +82,7 @@ export function HeaderSearch({ setSearchBar }) {
           />
         </Group>
 
-        <Group>
-          <MantineLogo size={28} />
-        </Group>
+        <Logo />
 
         <Group>
           <Group ml={50} gap={5} className={classes.links} visibleFrom="sm">

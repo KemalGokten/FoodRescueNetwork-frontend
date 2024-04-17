@@ -57,7 +57,7 @@ const RestaurantsPage = ({ searchBar }) => {
   return (
     <>
       <h1>Restaurants</h1>
-      <Flex align="center" gap={70} justify="space-between">
+      <Flex align="center" gap={70} justify="space-between" mb={16}>
         <Flex align="center" gap={8}>
           <label>sort by</label>
           <Select

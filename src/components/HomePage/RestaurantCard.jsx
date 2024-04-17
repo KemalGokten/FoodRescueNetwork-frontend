@@ -15,6 +15,7 @@ import { Avatar } from "@mantine/core";
 const RestaurantCard = ({ restaurantData }) => {
   return (
     <Card
+      my={16}
       withBorder
       shadow="xl"
       padding="md"

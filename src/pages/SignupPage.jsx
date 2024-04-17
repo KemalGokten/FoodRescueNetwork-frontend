@@ -1,6 +1,15 @@
-import { Select, TextInput, PasswordInput, Button } from "@mantine/core";
+import {
+  Select,
+  TextInput,
+  PasswordInput,
+  Button,
+  Flex,
+  Text,
+} from "@mantine/core";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/ui/logo";
+import { Link } from "react-router-dom";
 
 const SignupPage = () => {
   const [accountType, setAccountType] = useState("");
@@ -52,48 +61,55 @@ const SignupPage = () => {
   };
 
   return (
-    <>
-      <h1>Signup Page</h1>
+    <Flex direction="column" justify="center" align="center">
+      <Logo size="16px" />
+      <h3>Signup</h3>
+
       <div>
         <form onSubmit={handleSubmit}>
-          <Select
-            placeholder="Choose account type"
-            data={["User", "Restaurant Owner"]}
-            value={accountType}
-            onChange={setAccountType}
-            error={accountType ? "" : "Please choose account"}
-          />
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-          <TextInput
-            placeholder="Full name"
-            value={fullName}
-            onChange={(event) => setFullName(event.target.value)}
-            required
-          />
-          <TextInput
-            placeholder="Username"
-            value={userName}
-            onChange={(event) => setUsername(event.target.value)}
-            required
-          />
-          <PasswordInput
-            radius="md"
-            placeholder="Password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-          <Button variant="filled" type="submit">
-            Register
-          </Button>
+          <Flex direction={"column"} gap={16} w={350}>
+            <Select
+              placeholder="Choose account type"
+              data={["User", "Restaurant Owner"]}
+              value={accountType}
+              onChange={setAccountType}
+              error={accountType ? "" : "Please choose account"}
+            />
+            <TextInput
+              placeholder="Email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
+            <TextInput
+              placeholder="Full name"
+              value={fullName}
+              onChange={(event) => setFullName(event.target.value)}
+              required
+            />
+            <TextInput
+              placeholder="Username"
+              value={userName}
+              onChange={(event) => setUsername(event.target.value)}
+              required
+            />
+            <PasswordInput
+              radius="md"
+              placeholder="Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+            <Button variant="filled" type="submit">
+              Register
+            </Button>
+          </Flex>
         </form>
       </div>
-    </>
+      <Text size="16px" my={16}>
+        Already have account? <Link to={"/"}>Login</Link>
+      </Text>
+    </Flex>
   );
 };
 
