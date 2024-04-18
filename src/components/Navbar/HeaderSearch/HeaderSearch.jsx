@@ -27,14 +27,17 @@ export function HeaderSearch({ setSearchBar }) {
 
   const navigate = useNavigate();
 
-  const itemsTest = links.map((link) => {
-    console.log("Link icon name:", link.icon.name);
-    link.icon.name === "AccountMenu"
-      ? console.log("Account Menu")
-      : console.log("Other Links");
-  });
+  const itemsTest = () => {
+    links.map((link) => {
+      console.log("Link icon name:", link.icon.name);
+      link.icon.name === "AccountMenu"
+        ? console.log("Account Menu")
+        : console.log("Other Links");
+    });
+  }
 
   itemsTest();
+  
 
   const items = links.map((link, index) => {
     return link.icon.name === "AccountMenu" ? (
