@@ -12,6 +12,7 @@ import AccountDetails from "./pages/AccountDetails.jsx";
 import PreviousOrdersPage from "./pages/PreviousOrdersPage.jsx";
 import SignupRestaurant from "./pages/SignupRestaurant.jsx";
 import FavoriteRestaurantsPage from "./pages/FavoriteRestaurantsPage.jsx";
+import DetailedRestaurantPage from "./pages/DetailedRestaurantPage.jsx";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -25,12 +26,23 @@ function App() {
         <Route path="/accounts/emailsignup/" element={<SignupPage />} />
         <Route path="/forgot_my_password" element={<ForgotPasswordPage />} />
         {isLoggedIn && (
-        <Route path="/restaurants" element={<RestaurantsPage searchBar= {searchBar} />} />
-      )}
-        <Route path= "/account_details" element = {<AccountDetails/>}/>
-        <Route path= "/previous_orders" element = {<PreviousOrdersPage/>}/>
-        <Route path= "/signup_restaurant" element = {<SignupRestaurant/>}/>
-        <Route path="/favorite_restaurants" element = {<FavoriteRestaurantsPage/> } />
+          <Route
+            path="/restaurants"
+            element={<RestaurantsPage searchBar={searchBar} />}
+          />
+        )}
+
+        {isLoggedIn && (
+          <Route path="/restaurants/:id" element={<DetailedRestaurantPage />} />
+        )}
+
+        <Route path="/account_details" element={<AccountDetails />} />
+        <Route path="/previous_orders" element={<PreviousOrdersPage />} />
+        <Route path="/signup_restaurant" element={<SignupRestaurant />} />
+        <Route
+          path="/favorite_restaurants"
+          element={<FavoriteRestaurantsPage />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
