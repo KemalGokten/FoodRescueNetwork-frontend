@@ -49,7 +49,7 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>Home Page</h1>
+      
       <HighlyRecommendedRestaurants restaurants={restaurantsByRating} />
       <RandomChoices restaurants={restrauntsByRandom} />
       <AllRestaurants restaurants={restaurants} />
