@@ -66,7 +66,7 @@ export default function AccountMenu() {
           Account settings
         </Menu.Item>
 
-        {user.accountType === "user" ? (
+        {user.accountType === "User" ? (
           <Menu.Item
             leftSection={
               <IconSwitchHorizontal
