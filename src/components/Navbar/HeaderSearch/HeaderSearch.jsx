@@ -27,19 +27,8 @@ export function HeaderSearch({ setSearchBar }) {
 
   const navigate = useNavigate();
 
-  const itemsTest = () => {
-    links.map((link) => {
-      link.icon.name === AccountMenu.name
-        ? console.log("Account Menu")
-        : console.log("Other Links");
-    });
-  }
-
-  itemsTest();
-  
-
   const items = links.map((link, index) => {
-    return link.icon.name === "AccountMenu" ? (
+    return link.icon.name === AccountMenu.name ? (
       <div key={index} className={classes.link}>
         <link.icon />
       </div>
