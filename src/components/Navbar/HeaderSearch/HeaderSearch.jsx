@@ -29,7 +29,7 @@ export function HeaderSearch({ setSearchBar }) {
 
   const itemsTest = () => {
     links.map((link) => {
-      console.log("Link icon name:", link.icon.name);
+      console.log("Link icon name:", AccountMenu.name);
       link.icon.name === "AccountMenu"
         ? console.log("Account Menu")
         : console.log("Other Links");
