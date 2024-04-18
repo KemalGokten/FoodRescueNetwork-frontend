@@ -66,11 +66,6 @@ const ForgotPasswordPage = () => {
       if (!userResponse.ok) {
         throw new Error("Failed to fetch user data.");
       } else {
-        setAlert({
-          type: "success",
-          message: "",
-        });
-
         notifications.show({
           title: "Change your password",
           message:
