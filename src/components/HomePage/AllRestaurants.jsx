@@ -4,7 +4,7 @@ import { Carousels } from "./Carousels.jsx";
 const AllRestaurants = ({ restaurants }) => {
   return (
     <>
-      <h3>All Restaurants : </h3> 
+      <h3 style={{ fontFamily: "Georgia, serif" }}>All Restaurants : </h3>
       <Link to="/restaurants">Show All </Link>
       <Carousels restaurantsData={restaurants} />
     </>
