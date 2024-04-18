@@ -10,10 +10,12 @@ import "@mantine/carousel/styles.css";
 import "./styles/global.css";
 import theme from "./styles/theme.js";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
+import { Notifications } from "@mantine/notifications";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
+    <Notifications />
       <AuthProvider>
         <Router>
           <App />
