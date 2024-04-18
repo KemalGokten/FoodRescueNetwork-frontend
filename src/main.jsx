@@ -16,7 +16,7 @@ import { Notifications } from "@mantine/notifications";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
-      <Notifications />
+      <Notifications position="top-right" zIndex={1000}/>
       <AuthProvider>
         <Router>
           <App />

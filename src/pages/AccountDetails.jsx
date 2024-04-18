@@ -24,7 +24,7 @@ const AccountDetails = () => {
         setUser(tempUser);
         notifications.show({
           title: "Change your personal informations",
-          message: "Hey there, you succesfuly changed yıur personal informations",
+          message: "Hey there, you succesfuly changed your personal informations",
         });
       }
     } catch (error) {
