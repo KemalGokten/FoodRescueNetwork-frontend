@@ -18,10 +18,10 @@ import { notifications } from "@mantine/notifications";
 const SignupRestaurant = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  function createRandomRating(){
-    const randomRating = Math.random() * 5; 
-  const limitedRating = randomRating.toFixed(1); 
-  return Number(limitedRating); 
+  function createRandomRating() {
+    const randomRating = Math.random() * 5;
+    const limitedRating = randomRating.toFixed(1);
+    return Number(limitedRating);
   }
 
   const [restaurant, setRestaurant] = useState({
@@ -50,32 +50,30 @@ const SignupRestaurant = () => {
     foods: [],
   });
 
-  const insertRestaurant = async(e) => {
+  const insertRestaurant = async (e) => {
     e.preventDefault();
-    console.log(restaurant);
 
-    const payload = {
-        restaurant
-      };
-  
-      const requestOptions = {
-        method: `POST`,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      };
+    const payload = restaurant;
 
-    try{
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/restaurants`,requestOptions);
-        if(response.ok){
-            console.log("Response ok");
-            notifications.show({
-                title: 'Signup a new restaurant',
-                message: 'Hey there, you succesfuly signed up your restaurant',
-              })
-        }
-    }
-    catch(error){
-        console.log(error,"on signing a new restaurant");
+    const requestOptions = {
+      method: `POST`,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    };
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/restaurants`,
+        requestOptions
+      );
+      if (response.ok) {
+        notifications.show({
+          title: "Signup a new restaurant",
+          message: "Hey there, you succesfuly signed up your restaurant",
+        });
+      }
+    } catch (error) {
+      console.log(error, "on signing a new restaurant");
     }
   };
 
@@ -244,12 +242,15 @@ const SignupRestaurant = () => {
             value={restaurant.collectTime.endTime}
           />
 
-          <Textarea 
+          <Textarea
             label="Description"
             placeholder="Description"
             required
             onChange={(event) =>
-              setRestaurant({ ...restaurant, description: event.currentTarget.value })
+              setRestaurant({
+                ...restaurant,
+                description: event.currentTarget.value,
+              })
             }
             value={restaurant.description}
             autosize
