@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 const links = [
   { icon: IoHomeOutline, link: "/" },
   { icon: GrFavorite, link: "/favorite_restaurants" },
-  { icon: AccountMenu, link: "/myaccount" }, // Use AccountMenu component directly
+  { icon: AccountMenu }, // Use AccountMenu component directly
   { icon: IoIosBasket, link: "/cart" },
 ];
 export function HeaderSearch({ setSearchBar }) {
@@ -26,6 +26,15 @@ export function HeaderSearch({ setSearchBar }) {
   const [opened, { toggle }] = useDisclosure(false);
 
   const navigate = useNavigate();
+
+  const itemsTest = links.map((link) => {
+    console.log("Link icon name:", link.icon.name);
+    link.icon.name === "AccountMenu"
+      ? console.log("Account Menu")
+      : console.log("Other Links");
+  });
+
+  itemsTest();
 
   const items = links.map((link, index) => {
     return link.icon.name === "AccountMenu" ? (
