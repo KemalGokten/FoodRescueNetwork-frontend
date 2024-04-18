@@ -68,6 +68,11 @@ const ForgotPasswordPage = () => {
       } else {
         setAlert({
           type: "success",
+          message: "",
+        });
+
+        notifications.show({
+          title: "Change your password",
           message:
             "Your Password changed successfully. You will be directing to Login page!",
         });
