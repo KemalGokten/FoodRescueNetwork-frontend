@@ -6,7 +6,7 @@ import {
   Flex,
   ActionIcon,
 } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./ResturantCard.module.css";
 import { IoIosStar } from "react-icons/io";
 import { Avatar } from "@mantine/core";
@@ -19,6 +19,8 @@ const RestaurantCard = ({restaurantData }) => {
   const { user } = useContext(AuthContext);
   const [favoritesData, setFavoritesData] = useState([]);
   const [isFilled, setIsFilled] = useState(false);
+
+  const navigate = useNavigate();
 
   const getRestaurantFavorite = async (onMounting) => {
     try {
@@ -47,7 +49,14 @@ const RestaurantCard = ({restaurantData }) => {
     getRestaurantFavorite(true);
   }, []);
 
-  async function onClickFavorite() {
+  const onClickCard =() => {
+    navigate(`/restaurants/${restaurantData.id}`,{state:{restaurantData:restaurantData}});
+  }
+
+  async function onClickFavorite(event) {
+    
+    event.stopPropagation(); 
+
     setIsFilled(!isFilled);
     
     const copyFavoriteRestaurants = await getRestaurantFavorite();
@@ -96,6 +105,7 @@ const RestaurantCard = ({restaurantData }) => {
       target="_blank"
       // TODO: add proper page route here
       radius="lg"
+      onClick={onClickCard}
     >
       <Card.Section>
         <Box mx="auto" h={130} pos={"relative"} className={styles.boxContainer}>
@@ -163,6 +173,8 @@ const RestaurantCard = ({restaurantData }) => {
           <span className={styles.price}>{restaurantData.price} €</span>
         </span>
       </Text>
+      
+
     </Card>
   );
 };
