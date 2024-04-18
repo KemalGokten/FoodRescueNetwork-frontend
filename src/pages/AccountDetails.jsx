@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext.jsx";
 import { Button, Group, PasswordInput, TextInput, Flex } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 
 const AccountDetails = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -9,7 +10,6 @@ const AccountDetails = () => {
 
   const updateUser = async (e) => {
     e.preventDefault();
-    console.log("Submit worked");
 
     try {
       const response = await fetch(
@@ -22,7 +22,10 @@ const AccountDetails = () => {
       );
       if (response.ok) {
         setUser(tempUser);
-        console.log("User successfully updated");
+        notifications.show({
+          title: "Signup a new restaurant",
+          message: "Hey there, you succesfuly signed up your restaurant",
+        });
       }
     } catch (error) {
       console.log(" Error by updating the user ", error);
