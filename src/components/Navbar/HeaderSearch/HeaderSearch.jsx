@@ -34,8 +34,8 @@ export function HeaderSearch({ setSearchBar }) {
       </div>
     ) : (
       <Link key={index} to={link.link} className={classes.link}>
-        <Avatar color="blue" radius="sm">
-          <link.icon size="1.5rem" />
+        <Avatar color="green" radius="sm">
+          <link.icon color="orange" size="1.5rem" />
         </Avatar>
       </Link>
     );

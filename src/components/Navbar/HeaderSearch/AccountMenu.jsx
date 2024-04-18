@@ -48,8 +48,8 @@ export default function AccountMenu() {
         <UnstyledButton
           className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
         >
-          <Avatar color="blue" radius="sm" size={40}>
-            <RiUser3Line size="1.5rem" />
+          <Avatar color="green" radius="sm" size={40}>
+            <RiUser3Line color="orange" size="1.5rem" />
           </Avatar>
         </UnstyledButton>
       </Menu.Target>
