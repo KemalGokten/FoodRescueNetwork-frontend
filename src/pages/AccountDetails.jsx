@@ -23,8 +23,8 @@ const AccountDetails = () => {
       if (response.ok) {
         setUser(tempUser);
         notifications.show({
-          title: "Signup a new restaurant",
-          message: "Hey there, you succesfuly signed up your restaurant",
+          title: "Change your personal informations",
+          message: "Hey there, you succesfuly changed yıur personal informations",
         });
       }
     } catch (error) {

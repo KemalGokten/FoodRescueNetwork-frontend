@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
+import "@mantine/notifications/styles.css";
 
 import "./styles/global.css";
 import theme from "./styles/theme.js";
@@ -15,7 +16,7 @@ import { Notifications } from "@mantine/notifications";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
-    <Notifications />
+      <Notifications />
       <AuthProvider>
         <Router>
           <App />
