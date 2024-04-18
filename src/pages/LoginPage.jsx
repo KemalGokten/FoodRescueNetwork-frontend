@@ -1,9 +1,17 @@
-import { PasswordInput, Button, TextInput, Alert } from "@mantine/core";
+import {
+  PasswordInput,
+  Button,
+  TextInput,
+  Alert,
+  Flex,
+  Text,
+} from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import Logo from "../components/ui/logo";
 
 const LoginPage = () => {
   //States
@@ -20,7 +28,9 @@ const LoginPage = () => {
   const loginUser = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/users?email=${email}&password=${password}`
+        `${
+          import.meta.env.VITE_API_URL
+        }/users?email=${email}&password=${password}`
       );
 
       if (response.ok) {
@@ -49,9 +59,9 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <h1>Login Page</h1>
-
+    <Flex direction="column" justify="center" align="center">
+      <Logo />
+      <h3>Sign in</h3>
       {alert && (
         <Alert
           variant="light"
@@ -66,23 +76,17 @@ const LoginPage = () => {
         </Alert>
       )}
 
-      <div>
-        <img src="" alt="App Logo" />
-        <h2>Food Rescue</h2>
-      </div>
-      <div>
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <Flex direction={"column"} gap={16} w={350}>
           <TextInput
             value={email}
             variant="default"
-            radius="md"
             placeholder="User name or email"
             type="text"
             required
             onChange={(event) => setEmail(event.currentTarget.value)}
           />
           <PasswordInput
-            radius="md"
             placeholder="Password"
             value={password}
             required
@@ -91,8 +95,9 @@ const LoginPage = () => {
           <Button variant="filled" type="submit">
             Login
           </Button>
-        </form>
-      </div>
+        </Flex>
+      </form>
+
       <div>
         <Link to="/forgot_my_password" state={{ email }}>
           Forgot password?
@@ -104,7 +109,7 @@ const LoginPage = () => {
           <Link to="/accounts/emailsignup/">Sign up</Link>{" "}
         </p>
       </div>
-    </>
+    </Flex>
   );
 };
 

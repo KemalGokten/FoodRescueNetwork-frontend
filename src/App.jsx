@@ -8,22 +8,31 @@ import { AuthContext } from "./contexts/AuthContext.jsx";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
 import RestaurantsPage from "./pages/RestaurantsPage.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
+import AccountDetails from "./pages/AccountDetails.jsx";
+import PreviousOrdersPage from "./pages/PreviousOrdersPage.jsx";
+import SignupRestaurant from "./pages/SignupRestaurant.jsx";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
   const [searchBar, setSearchBar] = useState("");
 
   return (
-    <>
-      {isLoggedIn && <Navbar setSearchBar= {setSearchBar} />}
+    <div style={{ margin: "0 16px 16px 16px" }}>
+      {isLoggedIn && <Navbar setSearchBar={setSearchBar} />}
       <Routes>
         <Route path="/" element={isLoggedIn ? <HomePage /> : <LoginPage />} />
         <Route path="/accounts/emailsignup/" element={<SignupPage />} />
         <Route path="/forgot_my_password" element={<ForgotPasswordPage />} />
+        {isLoggedIn && (
         <Route path="/restaurants" element={<RestaurantsPage searchBar= {searchBar} />} />
+      )}
+        <Route path= "/account_details" element = {<AccountDetails/>}/>
+        <Route path= "/previous_orders" element = {<PreviousOrdersPage/>}/>
+        <Route path= "/signup_restaurant" element = {<SignupRestaurant/>}/>
+        
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

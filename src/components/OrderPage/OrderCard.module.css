@@ -1,0 +1,32 @@
+.image {
+    filter: brightness(70%);
+  }
+  
+  .boxContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: end;
+  }
+  
+  .food {
+    padding: 2px 8px 2px 0;
+  }
+  
+  .cardFooter {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .price {
+    font-weight: 700;
+    font-size: 18px;
+    color: rgb(17, 88, 17);
+  }
+  

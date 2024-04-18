@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import { TextInput, Button, Alert } from "@mantine/core";
+import { TextInput, Button, Alert, Flex, Text } from "@mantine/core";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/ui/logo";
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate();
@@ -67,6 +68,11 @@ const ForgotPasswordPage = () => {
       } else {
         setAlert({
           type: "success",
+          message: "",
+        });
+
+        notifications.show({
+          title: "Change your password",
           message:
             "Your Password changed successfully. You will be directing to Login page!",
         });
@@ -105,38 +111,51 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <>
-      <h1>Forgot Password</h1>
+    <Flex direction="column" justify="center" align="center">
+      <Logo />
+      <h3>Forgot Password</h3>
+      <Text w={350} mb={32}>
+        Enter the email address ascociated to your account and we will send you
+        a code to reset your password.{" "}
+      </Text>
       <form onSubmit={handleSubmit}>
-        <TextInput
-          label="Email"
-          placeholder="Enter your email"
-          value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-          required
-        />
-        <Button type="submit">Send Verification Email</Button>
+        <Flex direction={"column"} gap={16} w={350}>
+          <TextInput
+            label="Email"
+            placeholder="Enter your email"
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
+            required
+          />
+          <Button type="submit">Send Verification Email</Button>
+        </Flex>
       </form>
-      {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+      {alert && (
+        <Alert my={16} type={alert.type}>
+          {alert.message}
+        </Alert>
+      )}
       {verificationCode && (
         <form onSubmit={handleChangePassword}>
-          <TextInput
-            label="Verification Code"
-            placeholder="Enter verification code"
-            onChange={(e) => setInputVerificationCode(e.target.value)}
-            required
-          />
-          <TextInput
-            label="New Password"
-            placeholder="Enter new password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-          />
-          <Button type="submit">Change Password</Button>
+          <Flex direction={"column"} gap={16} w={350}>
+            <TextInput
+              label="Verification Code"
+              placeholder="Enter verification code"
+              onChange={(e) => setInputVerificationCode(e.target.value)}
+              required
+            />
+            <TextInput
+              label="New Password"
+              placeholder="Enter new password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+            <Button type="submit">Change Password</Button>
+          </Flex>
         </form>
       )}
-    </>
+    </Flex>
   );
 };
 
