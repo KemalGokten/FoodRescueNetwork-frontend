@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 const links = [
   { icon: IoHomeOutline, link: "/" },
-  { icon: GrFavorite, link: "/wishlist" },
+  { icon: GrFavorite, link: "/favorite_restaurants" },
   { icon: AccountMenu, link: "/myaccount" }, // Use AccountMenu component directly
   { icon: IoIosBasket, link: "/cart" },
 ];
