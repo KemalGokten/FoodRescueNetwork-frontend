@@ -12,11 +12,78 @@ import { IoIosStar } from "react-icons/io";
 import { Avatar } from "@mantine/core";
 import { IconHeart } from "@tabler/icons-react";
 import { useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext, useEffect } from "react";
 
-const RestaurantCard = ({ restaurantData }) => {
+const RestaurantCard = ({restaurantData }) => {
+  const { user } = useContext(AuthContext);
+  const [favoritesData, setFavoritesData] = useState([]);
   const [isFilled, setIsFilled] = useState(false);
-  function onClickFavarite() {
+
+  const getRestaurantFavorite = async (onMounting) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/userFavorites?userId=${user.id}`
+      );
+
+      if (response.ok) {
+        const fetchedFavoritesData = await response.json();
+
+        setFavoritesData(fetchedFavoritesData[0]);
+        const userFavorites = fetchedFavoritesData[0].favoriteRestaurants;
+
+        if (userFavorites.includes(restaurantData.id) && onMounting) {
+          setIsFilled(true);
+        } 
+       
+        return fetchedFavoritesData[0];
+      }
+    } catch (error) {
+      console.log(error, "on getting previous orders");
+    }
+  };
+
+  useEffect(() => {
+    getRestaurantFavorite(true);
+  }, []);
+
+  async function onClickFavorite() {
     setIsFilled(!isFilled);
+    
+    const copyFavoriteRestaurants = await getRestaurantFavorite();
+
+    if (!isFilled) {
+      copyFavoriteRestaurants.favoriteRestaurants.push(restaurantData.id);
+    } else {
+      copyFavoriteRestaurants.favoriteRestaurants =
+        copyFavoriteRestaurants.favoriteRestaurants.filter(
+          (id) => id !== restaurantData.id
+        );
+    }
+    const payload = {
+      ...copyFavoriteRestaurants,
+      favoriteRestaurants: copyFavoriteRestaurants.favoriteRestaurants,
+    };
+
+    const requestOptions = {
+      method: `PUT`,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    };
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/userFavorites/${
+          copyFavoriteRestaurants.id
+        }`,
+        requestOptions
+      );
+      if (response.ok) {
+        console.log("Favorite liked and pushed to db");
+      }
+    } catch (error) {
+      console.log(error, "on getting previous orders");
+    }
   }
 
   return (
@@ -67,9 +134,13 @@ const RestaurantCard = ({ restaurantData }) => {
           })}
         </Text>
 
-        <ActionIcon variant="default" radius="md" size={36}>
+        <ActionIcon
+          variant="default"
+          radius="md"
+          size={36}
+          onClick={onClickFavorite}
+        >
           <IconHeart
-            onClick={onClickFavarite}
             className={styles.like}
             stroke={1.5}
             fill={isFilled ? "red" : "transparent"}
