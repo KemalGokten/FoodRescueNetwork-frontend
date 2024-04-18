@@ -29,3 +29,8 @@
   font-size: 18px;
   color: rgb(17, 88, 17);
 }
+.like {
+  color: var(--mantine-color-red-6);
+  width: rem(20px);
+  height: rem(20px);
+}

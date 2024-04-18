@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import AccountDetails from "./pages/AccountDetails.jsx";
 import PreviousOrdersPage from "./pages/PreviousOrdersPage.jsx";
 import SignupRestaurant from "./pages/SignupRestaurant.jsx";
+import FavoriteRestaurantsPage from "./pages/FavoriteRestaurantsPage.jsx";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -29,7 +30,7 @@ function App() {
         <Route path= "/account_details" element = {<AccountDetails/>}/>
         <Route path= "/previous_orders" element = {<PreviousOrdersPage/>}/>
         <Route path= "/signup_restaurant" element = {<SignupRestaurant/>}/>
-        
+        <Route path="/favorite_restaurants" element = {<FavoriteRestaurantsPage/> } />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
