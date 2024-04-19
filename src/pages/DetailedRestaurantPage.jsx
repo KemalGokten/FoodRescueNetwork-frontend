@@ -18,6 +18,7 @@ import { useLocation } from "react-router-dom";
 import styles from "./DetailedRestaurantPage.module.css";
 import { AuthContext } from "../contexts/AuthContext";
 import { FaLocationDot } from "react-icons/fa6";
+import { notifications } from "@mantine/notifications";
 
 const DetailedRestaurantPage = () => {
   const { user } = useContext(AuthContext);
@@ -153,6 +154,11 @@ const DetailedRestaurantPage = () => {
         );
         if(responsePut.ok){
           console.log("Order has added to db");
+          notifications.show({
+            title: "Order Now",
+            message:
+              "Hey there, you succesfuly ordered from this restaurant",
+          });
         }
       }
     } catch (error) {
