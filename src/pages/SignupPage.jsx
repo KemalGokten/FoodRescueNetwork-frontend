@@ -44,6 +44,7 @@ const SignupPage = () => {
         const responseData = await response.json();
         const userId = responseData.id;
         await createFavoriteRestaurant(userId);
+        await createRestaurantOrders(userId);
         navigate("/");
       } else {
         console.log("Creating a new user on signup error: response is not ok");
@@ -68,6 +69,32 @@ const SignupPage = () => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/userFavorites`,
+        requestOptions
+      );
+      if (response.ok) {
+      } else {
+        console.log("Creating a new user on signup error: response is not ok");
+      }
+    } catch (error) {
+      console.log("Creating a new user on signup", error);
+    }
+  };
+
+  const createRestaurantOrders = async (userId) => {
+    const payload = {
+      userId: userId,
+      previousOrders: [],
+    };
+
+    const requestOptions = {
+      method: `POST`,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    };
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/userOrders`,
         requestOptions
       );
       if (response.ok) {
