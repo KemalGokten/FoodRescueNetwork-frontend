@@ -15,7 +15,7 @@ import { useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useEffect } from "react";
 
-const RestaurantCard = ({restaurantData }) => {
+const RestaurantCard = ({ restaurantData }) => {
   const { user } = useContext(AuthContext);
   const [favoritesData, setFavoritesData] = useState([]);
   const [isFilled, setIsFilled] = useState(false);
@@ -36,8 +36,8 @@ const RestaurantCard = ({restaurantData }) => {
 
         if (userFavorites.includes(restaurantData.id) && onMounting) {
           setIsFilled(true);
-        } 
-       
+        }
+
         return fetchedFavoritesData[0];
       }
     } catch (error) {
@@ -49,16 +49,17 @@ const RestaurantCard = ({restaurantData }) => {
     getRestaurantFavorite(true);
   }, []);
 
-  const onClickCard =() => {
-    navigate(`/restaurants/${restaurantData.id}`,{state:{restaurantData:restaurantData}});
-  }
+  const onClickCard = () => {
+    navigate(`/restaurants/${restaurantData.id}`, {
+      state: { restaurantData: restaurantData },
+    });
+  };
 
   async function onClickFavorite(event) {
-    
-    event.stopPropagation(); 
+    event.stopPropagation();
 
     setIsFilled(!isFilled);
-    
+
     const copyFavoriteRestaurants = await getRestaurantFavorite();
 
     if (!isFilled) {
@@ -170,11 +171,9 @@ const RestaurantCard = ({restaurantData }) => {
             {restaurantData.rating}
           </span>
 
-          <span className={styles.price}>{restaurantData.price} €</span>
+          <span className={styles.price}>{restaurantData.discountPrice} €</span>
         </span>
       </Text>
-      
-
     </Card>
   );
 };

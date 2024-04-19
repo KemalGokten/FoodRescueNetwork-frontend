@@ -19,7 +19,6 @@ const links = [
   { icon: IoHomeOutline, link: "/" },
   { icon: GrFavorite, link: "/favorite_restaurants" },
   { icon: AccountMenu }, // Use AccountMenu component directly
-  { icon: IoIosBasket, link: "/cart" },
 ];
 export function HeaderSearch({ setSearchBar }) {
   const [searchBar, setSearchBarLocal] = useState("");
