@@ -18,8 +18,7 @@ import { useNavigate } from "react-router-dom";
 const links = [
   { icon: IoHomeOutline, link: "/" },
   { icon: GrFavorite, link: "/favorite_restaurants" },
-  { icon: AccountMenu, link: "/myaccount" }, // Use AccountMenu component directly
-  { icon: IoIosBasket, link: "/cart" },
+  { icon: AccountMenu }, // Use AccountMenu component directly
 ];
 export function HeaderSearch({ setSearchBar }) {
   const [searchBar, setSearchBarLocal] = useState("");
@@ -28,7 +27,7 @@ export function HeaderSearch({ setSearchBar }) {
   const navigate = useNavigate();
 
   const items = links.map((link, index) => {
-    return link.icon.name === "AccountMenu" ? (
+    return link.icon.name === AccountMenu.name ? (
       <div key={index} className={classes.link}>
         <link.icon />
       </div>
