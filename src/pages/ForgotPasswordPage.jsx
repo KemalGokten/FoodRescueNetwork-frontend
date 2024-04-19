@@ -4,6 +4,7 @@ import { TextInput, Button, Alert, Flex, Text } from "@mantine/core";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/ui/logo";
+import { notifications } from "@mantine/notifications";
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate();
@@ -65,13 +66,6 @@ const ForgotPasswordPage = () => {
       );
       if (!userResponse.ok) {
         throw new Error("Failed to fetch user data.");
-      } else {
-        notifications.show({
-          title: "Change your password",
-          message:
-            "Your Password changed successfully. You will be directing to Login page!",
-        });
-        setTimeout(() => navigate("/"), 2000);
       }
 
       const userDataArray = await userResponse.json();
@@ -87,10 +81,12 @@ const ForgotPasswordPage = () => {
       });
 
       if (updateResponse.ok) {
-        setAlert({
-          type: "success",
-          message: "Password changed successfully.",
+        notifications.show({
+          title: "Change your password",
+          message:
+            "Your Password changed successfully. You will be directing to Login page!",
         });
+        setTimeout(() => navigate("/"), 2000);
       } else {
         console.log("Password change response is not ok");
       }
